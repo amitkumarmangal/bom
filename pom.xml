@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<modelVersion>4.0.0</modelVersion>
+
+<!-- ========================= -->
+<!-- Parent BOM coordinates   -->
+<!-- ========================= -->
+<groupId>com.business</groupId>
+<artifactId>Bom</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>pom</packaging>
+
+<name>Platform Dependency BOM</name>
+<description>Centralized dependency management for all platform services</description>
+
+<!-- ========================= -->
+<!-- Global Properties        -->
+<!-- ========================= -->
+<properties>
+    <java.version>17</java.version>
+    <spring.boot.version>4.0.1</spring.boot.version>
+    <spring.eureka.version>5.0.0</spring.eureka.version>
+    <logback.version>1.5.24</logback.version>
+    <slf4j.version>2.0.17</slf4j.version>
+    <commons.lang3.version>3.20.0</commons.lang3.version>
+    <junit.jupiter.version>5.0.2</junit.jupiter.version>
+    <mockito.version>5.21.0</mockito.version>
+
+    <!-- Build Plugins -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.enforcer.version>3.4.1</maven.enforcer.version>
+    <maven.compiler.version>3.11.0</maven.compiler.version>
+</properties>
+
+<!-- ========================= -->
+<!-- Dependency Management    -->
+<!-- ========================= -->
+<dependencyManagement>
+    <dependencies>
+        <!-- Spring Boot BOM -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring.boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <version>${spring.eureka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</dependencyManagement>
+
+<!-- ========================= -->
+<!-- Build Plugin Management  -->
+<!-- ========================= -->
+<build>
+    <pluginManagement>
+        <plugins>
+            <!-- Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
+            <!-- Enforcer: STRICT dependency control -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-bom-only</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <!-- No dependency without BOM -->
+                                <requireDependencyManagement>
+                                    <message>
+                                        All dependencies must be declared in the parent BOM.
+                                    </message>
+                                </requireDependencyManagement>
+                                <!-- Prevent version conflicts -->
+                                <dependencyConvergence />
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+
+</project>
