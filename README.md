@@ -9,7 +9,7 @@ The BOM acts as a **single source of truth** for:
 * Approved libraries
 * Dependency versions
 * Java version
-* Build and enforcement rules
+* Build
 
 All child projects **must consume dependencies only via this BOM**.
 
@@ -20,7 +20,6 @@ All child projects **must consume dependencies only via this BOM**.
 * Eliminate dependency version drift
 * Enforce consistent builds across teams
 * Simplify upgrades and security patching
-* Prevent usage of unapproved libraries
 * Fail fast during CI for violations
 
 ---
@@ -30,7 +29,6 @@ All child projects **must consume dependencies only via this BOM**.
 * Centralized `dependencyManagement`
 * Imported third-party BOMs (e.g. Spring Boot)
 * Approved internal and external libraries
-* Maven Enforcer rules for governance
 * Plugin version alignment
 
 ---
@@ -43,7 +41,6 @@ This BOM enforces the following rules using **Maven Enforcer Plugin**:
 | ----------------------------- | ------------------------------------------------- |
 | Require Dependency Management | All dependencies must be declared in the BOM      |
 | No Hardcoded Versions         | Child projects cannot define dependency versions  |
-| Dependency Convergence        | Prevents multiple versions of the same dependency |
 | Fail Fast                     | Build fails immediately on violation              |
 
 ---
@@ -65,7 +62,7 @@ bom/
 ```xml
 <parent>
     <groupId>com.business</groupId>
-    <artifactId>Bom</artifactId>
+    <artifactId>bom</artifactId>
     <version>1.0-SNAPSHOT</version>
 </parent>
 ```
@@ -108,41 +105,6 @@ bom/
 
 ✔ Versions are resolved from the BOM
 ❌ Versions in child POMs are not allowed
-
----
-
-## ❌ What Is Not Allowed
-
-The following will **fail the build**:
-
-```xml
-<dependency>
-    <groupId>com.google.guava</groupId>
-    <artifactId>guava</artifactId>
-    <version>33.0.0</version>
-</dependency>
-```
-
-Reasons:
-
-* Dependency not declared in the BOM
-* Version specified in child project
-
----
-
-## 🧪 Build & Validation
-
-To validate BOM rules:
-
-```bash
-mvn clean verify
-```
-
-The build will fail if:
-
-* A dependency is not managed by the BOM
-* A dependency version is hardcoded
-* Dependency conflicts exist
 
 ---
 

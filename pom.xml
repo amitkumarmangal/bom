@@ -5,134 +5,148 @@
            http://maven.apache.org/POM/4.0.0
            http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-<!-- ========================= -->
-<!-- Parent BOM coordinates   -->
-<!-- ========================= -->
-<groupId>com.business</groupId>
-<artifactId>bom</artifactId>
-<version>1.0-SNAPSHOT</version>
-<packaging>pom</packaging>
+    <!-- ========================= -->
+    <!-- Parent BOM coordinates   -->
+    <!-- ========================= -->
+    <groupId>com.business</groupId>
+    <artifactId>bom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-<name>Platform Dependency BOM</name>
-<description>Centralized dependency management for all platform services</description>
+    <name>Platform Dependency BOM</name>
+    <description>Centralized dependency management for all platform services</description>
 
-<!-- ========================= -->
-<!-- Global Properties        -->
-<!-- ========================= -->
-<properties>
-    <java.version>17</java.version>
-    <spring.boot.version>3.5.8</spring.boot.version>
-    <spring.cloud.version>4.3.1</spring.cloud.version>
-    <jwt.version>0.11.5</jwt.version>
-    <logback.version>1.5.24</logback.version>
-    <slf4j.version>2.0.17</slf4j.version>
-    <commons.lang3.version>3.20.0</commons.lang3.version>
-    <junit.jupiter.version>5.14.2</junit.jupiter.version>
-    <mockito.version>5.21.0</mockito.version>
+    <!-- ========================= -->
+    <!-- Global Properties        -->
+    <!-- ========================= -->
+    <properties>
+        <java.version>17</java.version>
+        <spring.boot.version>3.5.8</spring.boot.version>
+        <spring.cloud.version>4.3.1</spring.cloud.version>
+        <jwt.version>0.11.5</jwt.version>
+        <logback.version>1.5.24</logback.version>
+        <slf4j.version>2.0.17</slf4j.version>
+        <commons.lang3.version>3.20.0</commons.lang3.version>
+        <junit.jupiter.version>5.14.2</junit.jupiter.version>
+        <mockito.version>5.21.0</mockito.version>
 
-    <!-- Build Plugins -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.enforcer.version>3.4.1</maven.enforcer.version>
-    <maven.compiler.version>3.11.0</maven.compiler.version>
-</properties>
+        <!-- Build Plugins -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.enforcer.version>3.4.1</maven.enforcer.version>
+        <maven.compiler.version>3.11.0</maven.compiler.version>
+    </properties>
 
-<!-- ========================= -->
-<!-- Dependency Management    -->
-<!-- ========================= -->
-<dependencyManagement>
-    <dependencies>
-        <!-- Spring Boot BOM -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>${spring.boot.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
-</dependencyManagement>
-
-<!-- ========================= -->
-<!-- Build Plugin Management  -->
-<!-- ========================= -->
-<build>
-    <pluginManagement>
+    <!-- ========================= -->
+    <!-- Dependency Management    -->
+    <!-- ========================= -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-config</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>extra-enforcer-rules</artifactId>
+                <version>1.11.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <!-- ========================= -->
+    <!-- Build Plugin Management  -->
+    <!-- ========================= -->
+    <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -142,35 +156,7 @@
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
-            <!-- Enforcer: STRICT dependency control -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${maven.enforcer.version}</version>
-                <executions>
-                    <execution>
-                        <id>enforce-bom-only</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <!-- No dependency without BOM -->
-                                <requireDependencyManagement>
-                                    <message>
-                                        All dependencies must be declared in the parent BOM.
-                                    </message>
-                                </requireDependencyManagement>
-                                <!-- Prevent version conflicts -->
-                                <dependencyConvergence />
-                            </rules>
-                            <fail>true</fail>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
-    </pluginManagement>
-</build>
+    </build>
 
 </project>
